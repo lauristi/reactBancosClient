@@ -1,0 +1,11 @@
+.table {
+    text-align: left;
+  }
+  
+  .table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f8f9fa;
+  }
+  
+  .table-striped tbody tr:nth-of-type(even) {
+    background-color: #ffffff;
+  }

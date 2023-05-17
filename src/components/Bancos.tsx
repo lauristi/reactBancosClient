@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import { Link } from 'react-router-dom';
-import Loader from './common/Loader'; 
+import Loader from './common/Loader';
+import '../assets/css/TabelaBancos.css'
 
 interface Banco {
   ispb: string;
@@ -12,7 +13,7 @@ interface Banco {
 
 // React.FC = () =>  É necessario para que o arquivo typescript interprete os comandos JSX 
 const Bancos: React.FC = () => {
-  
+
   const [bancos, setBancos] = useState<Banco[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -25,40 +26,42 @@ const Bancos: React.FC = () => {
       .finally(() => setLoading(false));
   }, []);
 
-  return (
-    <div>
-      <h1>Bancos</h1>
-       
-       <div>
-         <Link to="/">retornar a página inicial</Link>
-       </div>   
+  if (loading) {
+    return (<Loader />);
+  } else {
+    return (
+      <div>
+        <h1>Bancos</h1>
 
-      {/* Loader */}
-      {loading ? <Loader /> : null}
-
-        <table>
-          <thead>
-            <tr>
-              <th>ISPB</th>
-              <th>Nome</th>
-              <th>Código</th>
-              <th>Nome Completo</th>
-            </tr>
-          </thead>
-          <tbody>
-            {bancos.map((banco) => (
-              <tr key={banco.ispb}>
-                <td>{banco.ispb}</td>
-                <td>{banco.name}</td>
-                <td>{banco.code}</td>
-                <td>{banco.fullName}</td>
+        <div>
+          <Link to="/">retornar a página inicial</Link>
+        </div>
+        <p></p>
+        <div>
+          <table className="table table-striped">
+            <thead>
+              <tr>
+                <th>ISPB</th>
+                <th>Nome</th>
+                <th>Código</th>
+                <th>Nome Completo</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      )
-    </div>
-  );
+            </thead>
+            <tbody>
+              {bancos.map((banco) => (
+                <tr key={banco.ispb}>
+                  <td>{banco.ispb}</td>
+                  <td>{banco.name}</td>
+                  <td>{banco.code}</td>
+                  <td>{banco.fullName}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    )
+  };
 }
 
 export default Bancos;

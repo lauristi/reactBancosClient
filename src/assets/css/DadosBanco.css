@@ -1,0 +1,26 @@
+.container {
+    margin-top: -300px;  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .dado-banco {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .dado-banco p:nth-of-type(odd) {
+    background-color: #f8f9fa;
+  }
+  
+  .dado-banco p:nth-of-type(even) {
+    background-color: #ffffff;
+  }
+  
+  .input-container {
+    margin-bottom: 10px;
+  }
+  
