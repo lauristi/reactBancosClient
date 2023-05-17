@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import Loader from './common/Loader'; 
+import { Link } from 'react-router-dom';
 
 interface DadosBanco {
   ispb: string;
@@ -8,7 +10,10 @@ interface DadosBanco {
   fullName: string;
 }
 
+// React.FC = () =>  É necessario para que o arquivo typescript interprete os comandos JSX 
+// Permite parametrizar as propos de componentes como button, por exemplo.
 const Banco: React.FC = () => {
+ 
   const [codigo, setCodigo] = useState('');
   const [dados, setDados] = useState<DadosBanco | null>(null);
   const [loading, setLoading] = useState(false);
@@ -35,7 +40,14 @@ const Banco: React.FC = () => {
         onChange={event => setCodigo(event.target.value)}
       />
       <button onClick={buscarDados}>Buscar</button>
-      {loading ? <div>Carregando...(O primeiro acesso pode demorar um pouco mais...)</div> : null}
+      
+      <div>
+         <Link to="/">retornar a página inicial</Link>
+      </div>   
+
+      {/* Loader */}
+      {loading ? <Loader /> : null}
+
       {dados ? (
         <div>
           <h1>Dados</h1>

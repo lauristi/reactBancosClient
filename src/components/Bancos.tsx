@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import { Link } from 'react-router-dom';
+import Loader from './common/Loader'; 
 
 interface Banco {
   ispb: string;
@@ -9,7 +10,9 @@ interface Banco {
   fullName: string;
 }
 
-function Bancos() {
+// React.FC = () =>  É necessario para que o arquivo typescript interprete os comandos JSX 
+const Bancos: React.FC = () => {
+  
   const [bancos, setBancos] = useState<Banco[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -30,9 +33,9 @@ function Bancos() {
          <Link to="/">retornar a página inicial</Link>
        </div>   
 
-      {loading ? (
-        <div className="loading-spinner">Carregando...</div>
-      ) : (
+      {/* Loader */}
+      {loading ? <Loader /> : null}
+
         <table>
           <thead>
             <tr>
@@ -53,7 +56,7 @@ function Bancos() {
             ))}
           </tbody>
         </table>
-      )}
+      )
     </div>
   );
 }
