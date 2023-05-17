@@ -1,4 +1,4 @@
-# Frontend feito em React
+# Front-end feito em React
 ### Com Rotas TypeScript e BootStap
 
 Este projeto encontra-se hospedado para teste no serviço `netlify.com` em: https://reactbancoclient.netlify.app/
