@@ -1,46 +1,83 @@
-# Getting Started with Create React App
+# Frontend feito em React
+### Com Rotas TypeScript e BootStap
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este projeto encontra-se hospedado para teste no serviço `netlify.com` em: https://reactbancoclient.netlify.app/
 
-## Available Scripts
 
-In the project directory, you can run:
+O código  Backend consumido está no repositório e encontra-se
+hospedado para testes no `render.com` em:
+
+    https://nodewebapi.onrender.com/api/brasilApi/banco/104
+    https://nodewebapi.onrender.com/api/brasilApi/bancos
+
+
+## Foram utilizados os seguintes pacotes:
 
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Pacote responsavel por gerencia as requisições http:
+### `npm i axios`
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Pacote responsavel por gerencia as rotas das paginas:
+### `npm i react-router-dom`  
 
-### `npm test`
+Pacote para usar typeScript:
+### `npm install --save-dev typescript` -> lib para usar TypeScript
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+pacote para lidar com variaveis de ambiente:
+### `npm install react-dotenv` 
 
-### `npm run build`
+pacote para utilização de BootStrap
+### `npm install react-bootstrap bootstrap`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Dependencias para Type Script:
+### `npm install axios @types/axios dotenv @types/node bootstrap @types/bootstrap`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+## A saber:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Correção para o erro:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+`ERR_OSSL_EVP_UNSUPPORTED` 
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+No arquivo:
 
-## Learn More
+```node_modules\react-scripts\config\webpack.config.js```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Adicione as seguintes linhas:
+
+```
+const crypto = require("crypto");
+const crypto_orig_createHash = crypto.createHash;
+crypto.createHash = algorithm => crypto_orig_createHash(algorithm == "md4" ? "sha256" : algorithm);
+```
+
+### Peculiaridades do projeto com TypeScript
+
+
+Diretiva `React.FC`
+
+```
+const Banco: React.FC = () => {
+```
+
+"React.FC" é uma abreviação para "React.FunctionComponent". É uma interface genérica fornecida pelo React que define a estrutura e as propriedades que um componente de função deve ter.
+
+Em projetos TypeScript, o uso de React.FC é uma prática comum para definir componentes de função que utilizam JSX.
+
+O React.FC é uma interface genérica que já inclui as propriedades padrão do React, como children (para representar os elementos filhos do componente) e props (para representar as propriedades do componente). Assim, ao usar React.FC, você não precisa explicitamente definir essas propriedades.
+
+Além disso, React.FC também permite uma inferência de tipo mais fácil para as props, pois pode ser genericamente parametrizado com um tipo para as props do componente. Por exemplo, React.FC<MyProps> define um componente que recebe props do tipo MyProps.
+
+
+
+### Arquivos de codigo em um projeto React com TypeScript
+
+`Arquivos .ts`: Arquivos de código fonte escritos em TypeScript
+
+`Arquivos .tsx`: Arquivos de código fonte escritos em TypeScript com suporte a sintaxe JSX. O JSX é uma extensão de sintaxe do JavaScript que permite escrever componentes React de forma declarativa. 
+
+`Arquivos .jsx`: Arquivos de código fonte escritos em JavaScript com suporte a sintaxe JSX. O JSX é uma extensão de sintaxe do JavaScript que permite escrever componentes React de forma declarativa. 
